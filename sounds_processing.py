@@ -4,6 +4,8 @@ import matplotlib.pyplot as plt
 from entropy import entropy
 from scipy import stats
 
+from utils.spectral_flatness import FeatureSpectralFlatness
+
 data, sampling_rate = librosa.load('friday-rocks.wav')
 
 
@@ -28,6 +30,7 @@ iqr = stats.iqr(frequency_values)
 skew = stats.skew(data)
 kurt = stats.kurtosis(data)
 spectral_entropy = entropy.spectral_entropy(data, sampling_rate, normalize=True)
+spectral_flatness = np.mean(librosa.feature.spectral_flatness(y=data))
 
 print("Mean frequency: " + str(mean_freq))
 print("Standard deviation: " + str(std_freq))
@@ -38,5 +41,7 @@ print("IQR: " + str(iqr))
 print("Skew: " + str(skew))
 print("Kurt: " + str(kurt))
 print("Spectral Entropy: " + str(spectral_entropy))
+print("Spectral Flatness: " + str(spectral_flatness))
+
 
 print()
