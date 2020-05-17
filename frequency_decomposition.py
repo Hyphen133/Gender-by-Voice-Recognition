@@ -36,23 +36,23 @@ n_mels = 200
 fmax = 6000
 
 
-y, sr = librosa.load('friday-rocks.wav')
-D = np.abs(librosa.stft(y)) ** 2
-S = librosa.feature.melspectrogram(S=D, sr=sr)
-S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=n_mels, fmax=fmax)
-print(S.transpose().shape)
-values = []
-for s in S.transpose():
-    values.append(np.argmax(s) * fmax/n_mels)
+def get_fundamental_frequencies_values(filepath):
+    y, sr = librosa.load(filepath)
+    D = np.abs(librosa.stft(y)) ** 2
+    S = librosa.feature.melspectrogram(S=D, sr=sr)
+    S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=n_mels, fmax=fmax)
+    print(S.transpose().shape)
+    values = []
+    for s in S.transpose():
+        values.append(np.argmax(s) * fmax / n_mels)
 
-# plt.figure(figsize=(10, 4))
-# S_dB = librosa.power_to_db(S, ref=np.max)
-# librosa.display.specshow(S_dB, x_axis='time',
-#                          y_axis='mel', sr=sr,
-#                          fmax=20000)
-# plt.colorbar(format='%+2.0f dB')
-# plt.title('Mel-frequency spectrogram')
-# plt.tight_layout()
-# plt.show()
-
-print(values)
+    # plt.figure(figsize=(10, 4))
+    # S_dB = librosa.power_to_db(S, ref=np.max)
+    # librosa.display.specshow(S_dB, x_axis='time',
+    #                          y_axis='mel', sr=sr,
+    #                          fmax=20000)
+    # plt.colorbar(format='%+2.0f dB')
+    # plt.title('Mel-frequency spectrogram')
+    # plt.tight_layout()
+    # plt.show()
+    return values
