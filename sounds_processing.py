@@ -4,6 +4,8 @@ import numpy as np
 from entropy import entropy
 from scipy import stats
 
+from frequency_decomposition import get_fundamental_frequencies_values
+
 data, sampling_rate = librosa.load('friday-rocks.wav')
 
 
@@ -30,6 +32,9 @@ kurt = stats.kurtosis(data)
 spectral_entropy = entropy.spectral_entropy(data, sampling_rate, normalize=True)
 spectral_flatness = np.mean(librosa.feature.spectral_flatness(y=data))
 
+values = get_fundamental_frequencies_values('friday-rocks.wav')
+
+
 print("Mean frequency: " + str(mean_freq))
 print("Standard deviation: " + str(std_freq))
 print("Median: " + str(median_freq))
@@ -40,6 +45,9 @@ print("Skew: " + str(skew))
 print("Kurt: " + str(kurt))
 print("Spectral Entropy: " + str(spectral_entropy))
 print("Spectral Flatness: " + str(spectral_flatness))
+print("minfun: " + str(np.min(values)/1000))
+print("maxfun: " + str(np.max(values)/1000))
+print("meadnfun: " + str(np.mean(values)/1000))
 
 
 print()

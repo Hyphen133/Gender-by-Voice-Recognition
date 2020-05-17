@@ -32,8 +32,8 @@ import librosa.display
 
 import matplotlib.pyplot as plt
 
-n_mels = 200
-fmax = 6000
+n_mels = 280
+fmax = 280
 
 
 def get_fundamental_frequencies_values(filepath):
