@@ -1,10 +1,8 @@
 import librosa as librosa
-import numpy as np
 import matplotlib.pyplot as plt
+import numpy as np
 from entropy import entropy
 from scipy import stats
-
-from utils.spectral_flatness import FeatureSpectralFlatness
 
 data, sampling_rate = librosa.load('friday-rocks.wav')
 
