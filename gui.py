@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 
-class SampleApp(tk.Tk):
+class View(tk.Tk):
 
     def __init__(self, *args, **kwargs):
         tk.Tk.__init__(self, *args, **kwargs)
@@ -34,6 +34,8 @@ class SampleApp(tk.Tk):
         frame = self.frames[page_name]
         frame.tkraise()
 
+    def set_gender(self,gender):
+        app.frames["GenederRecognitionPage"].set_gender(gender)
 
 class RecordingPage(tk.Frame):
 
@@ -110,5 +112,6 @@ class GenederRecognitionPage(tk.Frame):
 
 
 if __name__ == "__main__":
-    app = SampleApp()
+    app = View()
+    app.set_gender(Gender.FEMALE)
     app.mainloop()
